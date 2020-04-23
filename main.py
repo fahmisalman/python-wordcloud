@@ -10,6 +10,8 @@ font = '/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Fon
 text = preprocessing(open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Text/sample.txt').read())
 background = 'white'
 color_generator = True
+one_color = False
+color = None
 show = False
 save = True
 
@@ -26,6 +28,8 @@ ap.add_argument("-c", "--colorgenerator", required=False,
 	help=""),
 ap.add_argument("-s", "--show", required=False,
 	help="")
+ap.add_argument("--onecolor", required=False, help="")
+ap.add_argument("--color", required=False, help="")
 args = vars(ap.parse_args())
 
 if args['text']:
@@ -39,9 +43,27 @@ if args['background']:
 if args['colorgenerator']:
     if args['colorgenerator'].lower() == 'false':
         color_generator = False
+if args['color']:
+    if args['color'].lower() == 'red':
+        color = 0
+    elif args['color'].lower() == 'orange':
+        color = 30
+    elif args['color'].lower() == 'yellow':
+        color = 60
+    elif args['color'].lower() == 'green':
+        color = 120
+    elif args['color'].lower() == 'sky':
+        color = 180
+    elif args['color'].lower() == 'blue':
+        color = 240
+    elif args['color'].lower() == 'magenta':
+        color = 300
 if args['show']:
     show = args['show']
 
-wc = masking_wordcloud(text, font, mask, background)
-show_wordcloud(wc, show=show, save=True, color_generator=color_generator, mask=mask)
+wc = wordclouds(text, font, mask, background, color, color_generator=color_generator, show=show, save=save)
+wc.masking_wordcloud()
+wc.show_wordcloud()
+# wc = masking_wordcloud(text, font, mask, background)
+# show_wordcloud(wc, show=show, save=True, color_generator=color_generator, mask=mask)
 
