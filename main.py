@@ -9,7 +9,7 @@ mask = cv2.imread('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud
 font = '/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Font/Ignazio.ttf'
 text = preprocessing(open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Text/sample.txt').read())
 background = 'white'
-color_generator = False
+color_generator = True
 show = False
 save = True
 
@@ -37,7 +37,8 @@ if args['font']:
 if args['background']:
     background = args['background']
 if args['colorgenerator']:
-    color_generator = args['colorgenerator']
+    if args['colorgenerator'].lower() == 'false':
+        color_generator = False
 if args['show']:
     show = args['show']
 

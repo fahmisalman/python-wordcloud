@@ -17,7 +17,7 @@ def show_wordcloud(wc, show=False, save=True, color_generator=False, mask=None):
     plt.axis('off')
 
     if save:
-        plt.savefig('Result/Wordcloud.png', dpi=300)
+        plt.savefig('Result/Wordcloud.png', dpi=300, pad_inches=0, bbox_inches='tight')
 
     if show:
         plt.show()
