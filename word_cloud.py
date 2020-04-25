@@ -43,7 +43,8 @@ class wordclouds():
             plt.show()
 
     def masking_wordcloud(self):
-        if self.color:
-            self.wordcloud = WordCloud(stopwords=STOPWORDS, font_path=self.font, background_color=self.background_color, width=self.mask.shape[1], height=self.mask.shape[0], mask=self.mask, max_words=2000, max_font_size=256, random_state=42, color_func=self.random_color_func).generate(self.text)
+        stopwords = set(STOPWORDS)
+        if self.color != None:
+            self.wordcloud = WordCloud(stopwords=stopwords, font_path=self.font, background_color=self.background_color, width=self.mask.shape[1], height=self.mask.shape[0], mask=self.mask, max_words=2000, max_font_size=256, random_state=42, color_func=self.random_color_func).generate(self.text)
         else:
-            self.wordcloud = WordCloud(stopwords=STOPWORDS, font_path=self.font, background_color=self.background_color, width=self.mask.shape[1], height=self.mask.shape[0], mask=self.mask, max_words=2000, max_font_size=256, random_state=42).generate(self.text)
+            self.wordcloud = WordCloud(stopwords=stopwords, font_path=self.font, background_color=self.background_color, width=self.mask.shape[1], height=self.mask.shape[0], mask=self.mask, max_words=2000, max_font_size=256).generate(self.text)

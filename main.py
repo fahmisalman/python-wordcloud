@@ -1,11 +1,11 @@
 from preprocessing import preprocessing
 from word_cloud import *
-
+from PIL import Image
 import pandas as pd
+import numpy as np
 import argparse
-import cv2
 
-mask = cv2.imread('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Mask/twitter_mask.png')
+mask = np.array(Image.open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Mask/twitter.png'))
 font = '/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Font/Ignazio.ttf'
 text = preprocessing(open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Text/sample.txt').read())
 background = 'white'
@@ -35,7 +35,7 @@ args = vars(ap.parse_args())
 if args['text']:
     text = preprocessing(open(args['text']).read())
 if args['mask']:
-    mask = cv2.imread(args['mask'])
+    mask = np.array(Image.open(args['mask']))
 if args['font']:
     font = args['font']
 if args['background']:
@@ -58,9 +58,13 @@ if args['color']:
         color = 240
     elif args['color'].lower() == 'magenta':
         color = 300
+    print(color)
+    if type(color) == int:
+        color_generator = False
 if args['show']:
     show = args['show']
 
+print(args)
 wc = wordclouds(text, font, mask, background, color, color_generator=color_generator, show=show, save=save)
 wc.masking_wordcloud()
 wc.show_wordcloud()
