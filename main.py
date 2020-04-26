@@ -5,31 +5,30 @@ import pandas as pd
 import numpy as np
 import argparse
 
-mask = np.array(Image.open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Mask/twitter.png'))
-font = '/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Font/Ignazio.ttf'
-text = preprocessing(open('/Volumes/Macbook HDD/MyProject/Python/Wordcloud/New Wordcloud/Assets/Text/sample.txt').read())
+text = preprocessing(open('Assets/Text/sample.txt').read())
+mask = np.array(Image.open('Assets/Mask/twitter.png'))
+font = 'Assets/Font/Ignazio.ttf'
 background = 'white'
 color_generator = True
-one_color = False
 color = None
 show = False
 save = True
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-t", "--text", required=False,
-	help="Input sentence that will be classified")
+	help="Path of textfile that will be use")
 ap.add_argument("-m", "--mask", required=False,
-	help="Model that will be use in classification: model1 (without stemming and stopword), model2 (with stemming but without stopword), model3 (with stemming and stopword). If not defined, model1 will be used"),
+	help="Path of image that will be use as a mask"),
 ap.add_argument("-f", "--font", required=False,
-	help=""),
+	help="Path of font that will be use"),
 ap.add_argument("-b", "--background", required=False,
-	help=""),
+	help="Background color that will be use in the wordcloud (e.g. white, black, blue, etc.)"),
 ap.add_argument("-c", "--colorgenerator", required=False,
-	help=""),
+	help="true/false, if true this will be generating color of the image mask"),
 ap.add_argument("-s", "--show", required=False,
-	help="")
-ap.add_argument("--onecolor", required=False, help="")
-ap.add_argument("--color", required=False, help="")
+	help="Show image when process in completed")
+ap.add_argument("--color", required=False,
+    help="Dominant color that will be use in the wordcloud (e.g. white, black, blue, etc.)")
 args = vars(ap.parse_args())
 
 if args['text']:
